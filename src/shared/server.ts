@@ -1,6 +1,9 @@
 require('dotenv').config();
 import "reflect-metadata";
 import '../http/controllers/user.controller';
+import '../http/controllers/product.controller';
+import '../http/controllers/inventory.controller';
+import '../http/controllers/detail.controller';
 import express from 'express';
 import { InversifyExpressServer } from "inversify-express-utils";
 import environment from './config/environment';

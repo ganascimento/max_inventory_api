@@ -1,6 +1,6 @@
-import { param } from 'express-validator';
+import { query } from 'express-validator';
 
 export const findByInventoryValid = [
-    param('inventoryId')
+    query('inventoryId')
         .exists().withMessage('Required')
 ];

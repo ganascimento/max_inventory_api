@@ -11,6 +11,7 @@ In this API it was added the functionality to create, update, remove and list pr
   - Dependency Injection
   - Authentication JWT
   - Configuration file
+  - Test
  
  ## Dependencies  
   - Express 4.17.1

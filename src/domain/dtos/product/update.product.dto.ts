@@ -7,6 +7,7 @@ export class UpdateProductDto {
     unitType: string;
     brand: string;
     minAmount: number;
+    userId: string;
 
     constructor(id: string, name: string, value: number, identCode: string, description: string, unitType: string, brand: string, minAmount: number) {
         this.id = id;

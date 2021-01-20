@@ -6,6 +6,7 @@ export class CreateProductDto {
     unitType: string;
     brand: string;
     minAmount: number;
+    userId: string;
 
     constructor(name: string, value: number, identCode: string, description: string, unitType: string, brand: string, minAmount: number) {
         this.name = name;

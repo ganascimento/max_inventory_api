@@ -1,12 +1,12 @@
 export class ResultDetailDto {
     inventoryId: string;
-    description: string;
+    value: number;
     date: Date;
     isAdd: boolean;
 
-    constructor (inventoryId: string, description: string, date: Date, isAdd: boolean) {
+    constructor (inventoryId: string, value: number, date: Date, isAdd: boolean) {
         this.inventoryId = inventoryId;
-        this.description = description;
+        this.value = value;
         this.date = date;
         this.isAdd = isAdd;
     }

@@ -1,14 +1,35 @@
-import { ChangeAmountInventoryDto } from "../../domain/dtos/inventory/change.amount.inventory.dto";
+import { injectable } from "inversify";
+import mongoose from 'mongoose';
 import { IInventoryRepository } from "../../domain/repositories/inventory.repository.interface";
 import InventoryModel, { IInventoryModel } from '../models/inventory.model';
-import mongoose from 'mongoose';
 
+@injectable()
 export class InventoryRepository implements IInventoryRepository {
+
+    async findById(id: string): Promise<IInventoryModel | null> {
+        try {
+            const result = await InventoryModel.findOne()
+                .where('_id').equals(id);
+
+            if (result)
+                return {
+                    id: result.id,
+                    amount: result.amount,
+                    minAmount: result.minAmount,
+                    productId: result.productId
+                };
+            
+            return null;
+        }
+        catch (e) {
+            return null;
+        }
+    }    
 
     async findByProduct(productId: string): Promise<IInventoryModel | null> {
         try {
             const result = await InventoryModel.findOne()
-                .where('_id').equals(productId);
+                .where('productId').equals(productId);
 
             if (result) {
                 return {
@@ -18,8 +39,8 @@ export class InventoryRepository implements IInventoryRepository {
                     productId: result.productId
                 };
             }
-            else
-                return null;
+            
+            return null;
         }
         catch (e) {
             return null;
@@ -32,21 +53,40 @@ export class InventoryRepository implements IInventoryRepository {
 
             if (result)
                 return result.id;
-            else
-                return null;
+
+            return null;
         }
         catch (e) {
             return null;
         }
     }
     
-    async changeAmount(data: ChangeAmountInventoryDto): Promise<boolean> {
+    async changeAmount(inventory: IInventoryModel): Promise<boolean> {
         try {
             await InventoryModel.updateOne({
-                _id: new mongoose.mongo.ObjectId(data.id)
+                _id: new mongoose.mongo.ObjectId(inventory.id),
+                userId: inventory.userId
             }, {
                 $set: {
-                    amount: data.value
+                    amount: inventory.amount
+                }
+            });
+
+            return true;
+        }
+        catch (e) {
+            return false;
+        }
+    }
+
+    async changeMinAmount(inventory: IInventoryModel): Promise<boolean> {
+        try {
+            await InventoryModel.updateOne({
+                productId: inventory.productId,
+                userId: inventory.userId
+            }, {
+                $set: {
+                    minAmount: inventory.minAmount
                 }
             });
 

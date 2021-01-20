@@ -4,6 +4,9 @@ import request from 'supertest';
 import environment from './src/shared/config/environment';
 import Server from './src/shared/server';
 import UserModel from './src/infra/models/user.model';
+import ProductModel from './src/infra/models/product.model';
+import InventoryModel from './src/infra/models/inventory.model';
+import DetailModel from './src/infra/models/detail.model';
 
 let server: Server
 let address: string = "http://localhost:3001";
@@ -33,6 +36,9 @@ const generateToken = async () => {
 
 const afterAllTests = async () => {
     await UserModel.deleteMany({});
+    await ProductModel.deleteMany({});
+    await InventoryModel.deleteMany({});
+    await DetailModel.deleteMany({});
     server.shutdown();
 }
 

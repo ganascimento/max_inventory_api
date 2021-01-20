@@ -1,4 +1,4 @@
-import { body, param } from 'express-validator';
+import { body, query } from 'express-validator';
 
 export const createValid = [
     body('name')
@@ -35,6 +35,6 @@ export const updateValid = [
 ];
 
 export const removeValid = [
-    param('id')
+    query('id')
         .exists().withMessage('Required')
 ];

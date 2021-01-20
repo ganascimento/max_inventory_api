@@ -1,6 +1,8 @@
+import { injectable } from "inversify";
 import { IDetailRepository } from "../../domain/repositories/detail.repository.interface";
 import DetailModel, { IDetailModel } from "../models/detail.model";
 
+@injectable()
 export class DetailRepository implements IDetailRepository {
 
     async findByInventory(inventoryId: string): Promise<IDetailModel[] | null> {
@@ -13,13 +15,13 @@ export class DetailRepository implements IDetailRepository {
                     return {
                         id: item.id,
                         date: item.date,
-                        description: item.description,
+                        value: item.value,
                         inventoryId: item.inventoryId,
                         isAdd: item.isAdd
                     };
                 });
-            else
-                return null;
+            
+            return null;
         }
         catch (e) {
             return null;
@@ -32,8 +34,8 @@ export class DetailRepository implements IDetailRepository {
 
             if (result.id)
                 return result.id;
-            else
-                return null;
+            
+            return null;
         }
         catch (e) {
             return null;

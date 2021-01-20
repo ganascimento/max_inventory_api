@@ -3,7 +3,7 @@ import { Document, Schema, model } from 'mongoose';
 interface IDetailBase {
     userId: string;
     inventoryId: string;
-    description: string;
+    value: number;
     date: Date;
     isAdd: boolean;
 }
@@ -25,8 +25,8 @@ const DetailSchema = new Schema<IDetailDocument>({
         ref: 'Inventory',
         required: true
     },
-    description: {
-        type: String,
+    value: {
+        type: Number,
         required: true
     },
     date: {

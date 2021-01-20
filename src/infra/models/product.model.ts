@@ -11,7 +11,7 @@ interface IProductBase {
 }
 
 export interface IProductModel extends Partial<IProductBase> {
-    id: string;
+    id?: string;
 }
 
 interface IProductDocument extends IProductBase, Document {}
