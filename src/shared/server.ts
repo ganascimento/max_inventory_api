@@ -11,6 +11,7 @@ import errorConfig from './config/error.config';
 import container from './config/dependencies.config';
 import DbMongo from './db/db.mongo';
 import http from 'http';
+import cors from 'cors';
 
 class Server {
     private server: http.Server;
@@ -22,6 +23,7 @@ class Server {
         server.setConfig(app => {
             app.use(express.json());
             app.use(express.urlencoded({ extended: true }));
+            app.use(cors());
         });
 
         server.setErrorConfig(app => {
